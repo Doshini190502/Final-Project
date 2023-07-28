@@ -18,8 +18,8 @@ public List<Customermodel>getAllCustomermodels(){
 public Customermodel createCustomermodel(Customermodel customermodel) {
 	return custrepo.save(customermodel);
 }
-public Customermodel updateCustomermodel(int order_id,Customermodel customermodel) {
-	Customermodel existingCustomermodel=custrepo.findById(order_id).orElse(null);
+public Customermodel updateCustomermodel(int cust_id,Customermodel customermodel) {
+	Customermodel existingCustomermodel=custrepo.findById(cust_id).orElse(null);
 	if(existingCustomermodel!=null) {
 		existingCustomermodel.setCust_name(customermodel.getCust_name());
 		existingCustomermodel.setCust_id(customermodel.getCust_id());
@@ -27,11 +27,4 @@ public Customermodel updateCustomermodel(int order_id,Customermodel customermode
 	}
 	return null;
 }
-public void deleteCustomermodel(Integer order_id){
-	custrepo.deleteById(order_id);
-}
-public Customermodel getCustomermodel(int order_id) {
-	return custrepo.findById(order_id).orElse(null);
-}
-
 }

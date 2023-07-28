@@ -34,8 +34,5 @@ public Catalogmodel updateCatalogmodel(int plan_id,Catalogmodel catalogmodel) {
 public void deleteCatalogmodel(Integer plan_id){
 	catrepo.deleteById(plan_id);
 }
-public Catalogmodel getCatalogmodel(int plan_id) {
-	return catrepo.findById(plan_id).orElse(null);
-}
 
 }

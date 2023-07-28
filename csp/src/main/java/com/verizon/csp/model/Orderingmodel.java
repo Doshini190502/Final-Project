@@ -2,27 +2,24 @@ package com.verizon.csp.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 @Entity
 public class Orderingmodel {
-	@ManyToOne//Many books can be written by author
-	@JoinColumn(name="paln_id")
-	private Catalogmodel catalogmodel;
 	@Id
 	private int order_id;
-	
+	//@ManyToOne//Many books can be written by author
+	//@JoinColumn(name="paln_id")
+	private int plan_id;
 	public Orderingmodel() {
 		//TODO Auto-generated constructor stub
 		super();
 	}
-
-	public Catalogmodel getCatalogmodel() {
-		return catalogmodel;
+	
+	public int getPlan_id() {
+		return plan_id;
 	}
 
-	public void setCatalogmodel(Catalogmodel catalogmodel) {
-		this.catalogmodel = catalogmodel;
+	public void setPlan_id(int plan_id) {
+		this.plan_id = plan_id;
 	}
 
 	public int getOrder_id() {

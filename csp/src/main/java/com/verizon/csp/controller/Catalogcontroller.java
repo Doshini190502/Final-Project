@@ -3,7 +3,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,32 +19,21 @@ public class Catalogcontroller {
 	public Catalogcontroller(Catalogservice catservice) {
 		this.catservice=catservice;
 	}
-	@RequestMapping("/allcatalogmodel")
+	@RequestMapping("/allcatalog")
 	public List<Catalogmodel>getAllCatalogmodels(){
 		return catservice.getAllCatalogmodels();
 	}
-	@PostMapping("/insertcatalogmodel")
+	@PostMapping("/insertcatalog")
 	public Catalogmodel createCatalogmodel(@RequestBody Catalogmodel catalogmodel) {
 		return catservice.createCatalogmodel(catalogmodel);
 	}
-	@PostMapping("/updatecatalogmodel")
-	public Catalogmodel updateCatalogmodel(int plan_id,Catalogmodel catalogmodel) {
-		Catalogmodel existingCatalogmodel=catservice.updateCatalogmodel(plan_id,catalogmodel);
-		if(existingCatalogmodel!=null) {
-			existingCatalogmodel.setPlan_name(catalogmodel.getPlan_name());
-			existingCatalogmodel.setPrice(catalogmodel.getPrice());
-			existingCatalogmodel.setDuration(catalogmodel.getDuration());
-			return catservice.createCatalogmodel(existingCatalogmodel);
-		}
-		return null;
+	@PostMapping("/update/{paln_id}")
+	public Catalogmodel updateCatalogmodel(@PathVariable Integer plan_id,@RequestBody Catalogmodel catalogmodel) {
+	
+			return catservice.updateCatalogmodel(plan_id,catalogmodel);
 	}
-	@DeleteMapping("/deletecatalogmodel")
-	public void deleteCatalogmodel(Integer plan_id){
+	@DeleteMapping("/delete/{plan_id}")
+	public void deleteCatalogmodel(@PathVariable Integer plan_id){
 		catservice.deleteCatalogmodel(plan_id);
 	}
-	@GetMapping("/all")
-	public Catalogmodel getCatalogmodel(int plan_id) {
-		return catservice.getCatalogmodel(plan_id);
-	}
-	
 }

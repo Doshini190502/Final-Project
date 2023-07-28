@@ -6,13 +6,14 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 @Entity
 public class Customermodel {
-	@ManyToOne //Many books can be written by author
-	@JoinColumn(name="oder_id")
-	private Orderingmodel orderingmodel;
 	@Id
-	private String cust_name;
 	private int cust_id;
-	public Customermodel() {
+
+	@ManyToOne //Many books can be written by author
+	@JoinColumn(name="order_id")
+	private Orderingmodel orderingmodel;
+	private String cust_name;
+		public Customermodel() {
 		//TODO Auto-generated constructor stub
 		super();
 	}

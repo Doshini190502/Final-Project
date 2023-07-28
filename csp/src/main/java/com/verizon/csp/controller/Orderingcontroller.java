@@ -1,8 +1,7 @@
 package com.verizon.csp.controller;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,21 +16,16 @@ public class Orderingcontroller {
 	public Orderingcontroller(Orderingservice ordservice) {
 		this.ordservice=ordservice;
 	}
-	@RequestMapping("/allorderingmodel")
+	@RequestMapping("/allordering")
 	public List<Orderingmodel>getAllOrderingmodels(){
 		return ordservice.getAllOrderingmodels();
 	}
-	@PostMapping("/insertorderingmodel")
+	@PostMapping("/insertordering")
 	public Orderingmodel createOrderingmodel(@RequestBody Orderingmodel orderingmodel) {
 		return ordservice.createOrderingmodel(orderingmodel);
 	}
-	@DeleteMapping("/deleteorderingmodel")
-	public void deleteOrderingmodel(Integer order_id){
-		ordservice.deleteOrderingmodel(order_id);
+	@PostMapping("/update/{order_id}")
+	public Orderingmodel updateOrderingmodel(@PathVariable Integer order_id,@RequestBody Orderingmodel orderingmodel) {
+			return ordservice.updateOrderingmodel(order_id,orderingmodel);
 	}
-	@GetMapping("/all")
-	public Orderingmodel getOrderingmodel(int order_id) {
-		return ordservice.getOrderingmodel(order_id);
-	}
-	
 }

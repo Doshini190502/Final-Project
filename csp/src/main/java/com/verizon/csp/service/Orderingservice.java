@@ -19,11 +19,12 @@ public List<Orderingmodel>getAllOrderingmodels(){
 public Orderingmodel createOrderingmodel(Orderingmodel orderingmodel) {
 	return ordrepo.save(orderingmodel);
 }
-
-public void deleteOrderingmodel(Integer order_id){
-	ordrepo.deleteById(order_id);
-}
-public Orderingmodel getOrderingmodel(int order_id) {
-	return ordrepo.findById(order_id).orElse(null);
+public Orderingmodel updateOrderingmodel(int order_id,Orderingmodel orderingmodel) {
+	Orderingmodel existingOrderingmodel=ordrepo.findById(order_id).orElse(null);
+	if(existingOrderingmodel!=null) {
+		existingOrderingmodel.setOrder_id(orderingmodel.getOrder_id());
+		return ordrepo.save(existingOrderingmodel);
+	}
+	return null;
 }
 }
