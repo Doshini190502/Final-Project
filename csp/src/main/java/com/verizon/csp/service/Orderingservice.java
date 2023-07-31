@@ -7,24 +7,33 @@ import com.verizon.csp.repo.Orderingrepo;
 import com.verizon.csp.model.Orderingmodel;
 @Service
 public class Orderingservice {
+	private final  Orderingrepo orderrepo;
 	@Autowired
-	private final Orderingrepo ordrepo;
-public Orderingservice(Orderingrepo ordrepo) {
-	this.ordrepo=ordrepo;
-}
-public List<Orderingmodel>getAllOrderingmodels(){
-	return ordrepo.findAll();
-}
-
-public Orderingmodel createOrderingmodel(Orderingmodel orderingmodel) {
-	return ordrepo.save(orderingmodel);
-}
-public Orderingmodel updateOrderingmodel(int order_id,Orderingmodel orderingmodel) {
-	Orderingmodel existingOrderingmodel=ordrepo.findById(order_id).orElse(null);
-	if(existingOrderingmodel!=null) {
-		existingOrderingmodel.setOrder_id(orderingmodel.getOrder_id());
-		return ordrepo.save(existingOrderingmodel);
+	public Orderingservice(Orderingrepo orderrepo) 
+	{
+		this.orderrepo = orderrepo;
+		
 	}
-	return null;
-}
+	  
+	public List<Orderingmodel> getAllOrderModel()
+	{
+		return orderrepo.findAll();
+	}
+
+	public Orderingmodel createordermodel(Orderingmodel OrderModel) {
+		return orderrepo.save(OrderModel);
+	}
+	public Orderingmodel updateOrderModel(Integer plan_id, Orderingmodel od)
+	{
+		Orderingmodel existingOrderingmodel= orderrepo.findById(plan_id).orElse(null);
+		if(existingOrderingmodel !=null)
+		{
+			existingOrderingmodel.setPlan(od.getPlan());
+			existingOrderingmodel.setPlanid(od.getPlanid());
+			return orderrepo.save(existingOrderingmodel);
+		}
+		return null;
+	
+	
+	}
 }

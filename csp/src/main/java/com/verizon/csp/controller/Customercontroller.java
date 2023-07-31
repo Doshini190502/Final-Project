@@ -1,31 +1,32 @@
 package com.verizon.csp.controller;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import com.verizon.csp.model.Customermodel;
+import com.verizon.csp.repo.Customerrepo;
 import com.verizon.csp.service.Customerservice;
 @RestController
-@RequestMapping("/api/customermodel")
+@RequestMapping(value="/api/customermodel",method= {RequestMethod.GET,RequestMethod.POST})
 public class Customercontroller {
-	private Customerservice custservice;
+	private Customerrepo custrepo;
 	@Autowired
 	public Customercontroller(Customerservice custservice) {
-		this.custservice=custservice;
+		this.custrepo=custrepo;
 	}
-	@RequestMapping("/allcustomer")
-	public List<Customermodel>getAllCustomermodels(){
-		return custservice.getAllCustomermodels();
+	//@RequestMapping("/allcustomer")
+	//public List<Customermodel>getAllCustomermodels(){
+		//return custservice.getAllCustomermodels();
+@GetMapping("/create/customer")
+public String create (Customermodel customermodel) {
+	return "customer";
 	}
-	@PostMapping("/insertcustomer")
-	public Customermodel createCustomermodel(@RequestBody Customermodel customermodel) {
-		return custservice.createCustomermodel(customermodel);
+	@PostMapping("/submit-customer")
+	public String save(Customermodel customermodel)
+	{	this.custrepo.save(customermodel);
+		return "index";
 	}
-	@PostMapping("/update/{cust_id}")
-	public Customermodel updateCustomermodel(@PathVariable Integer cust_id,@RequestBody Customermodel customermodel) {
-			return custservice.updateCustomermodel(cust_id,customermodel);
-}
 }

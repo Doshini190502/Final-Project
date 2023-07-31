@@ -1,31 +1,39 @@
 package com.verizon.csp.controller;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import com.verizon.csp.model.Orderingmodel;
-import com.verizon.csp.service.Orderingservice;
+import com.verizon.csp.repo.Orderingrepo;
 @RestController
-@RequestMapping("/api/orderingmodel")
+@RequestMapping(value="/api/orderingmodel",method= {RequestMethod.GET,RequestMethod.POST})
 public class Orderingcontroller {
-	private Orderingservice ordservice;
+	private Orderingrepo odrepo;
+	 
 	@Autowired
-	public Orderingcontroller(Orderingservice ordservice) {
-		this.ordservice=ordservice;
+	public Orderingcontroller(Orderingrepo odrepo) 
+	{
+		
+		this.odrepo=odrepo;
 	}
-	@RequestMapping("/allordering")
-	public List<Orderingmodel>getAllOrderingmodels(){
-		return ordservice.getAllOrderingmodels();
-	}
-	@PostMapping("/insertordering")
-	public Orderingmodel createOrderingmodel(@RequestBody Orderingmodel orderingmodel) {
-		return ordservice.createOrderingmodel(orderingmodel);
-	}
-	@PostMapping("/update/{order_id}")
-	public Orderingmodel updateOrderingmodel(@PathVariable Integer order_id,@RequestBody Orderingmodel orderingmodel) {
-			return ordservice.updateOrderingmodel(order_id,orderingmodel);
-	}
+
+	/*
+	 * @RequestMapping("/allorder") public List<OrderModel> getAllOrderModel() {
+	 * return orderservice.getAllOrderModel();
+	 * 
+	 * }
+	 */ 
+	  @GetMapping("/create") 
+	  public String create(Orderingrepo odrepo) 
+	  { return "order"; 
+	  }
+	  @PostMapping("/submit-order")
+		public String save(Orderingmodel odmod)
+		{ 
+		  	this.odrepo.save(odmod);
+			return "index";
+		}
 }

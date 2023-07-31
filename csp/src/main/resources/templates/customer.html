@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Customer Page</title>
+</head>
+<body>
+    <h1>Customer Page</h1>
+    <form action="#" th:action="@{/submit-customer}" method="post">
+        <label for="cust_id">Customer ID:</label>
+        <input type="text" id="cust_id" name="cust_id" required>
+        <br>
+        <label for="cust_name">Customer Name:</label>
+        <input type="text" id="cust_name" name="cust_name" required>
+        <br>
+        <label for="orderingmodel">Ordering Model:</label>
+        <input type="text" id="orderingmodel" name="orderingmodel" required>
+        <br>
+        <button type="submit">Add Customer</button>
+    </form>
+</body>
+</html>

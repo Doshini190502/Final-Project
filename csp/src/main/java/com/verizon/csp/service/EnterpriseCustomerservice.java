@@ -22,7 +22,10 @@ public EnterpriseCustmodel createEnterpriseCustomermodel(EnterpriseCustmodel ent
 public EnterpriseCustmodel updateEnterpriseCustomermodel(int enterprisecust_id,EnterpriseCustmodel enterprisecustomermodel) {
 	EnterpriseCustmodel existingEnterpriseCustomermodel=enterprisecustrepo.findById(enterprisecust_id).orElse(null);
 	if(existingEnterpriseCustomermodel!=null) {
-		existingEnterpriseCustomermodel.setEnterprisecust_name(enterprisecustomermodel.getEnterprisecust_name());
+		existingEnterpriseCustomermodel.setEc_id(enterprisecustomermodel.getEc_id());
+		existingEnterpriseCustomermodel.setEc_name(enterprisecustomermodel.getEc_name());
+		existingEnterpriseCustomermodel.setDuration(enterprisecustomermodel.getDuration());
+		existingEnterpriseCustomermodel.setPrice(enterprisecustomermodel.getPrice());
 		return enterprisecustrepo.save(existingEnterpriseCustomermodel);
 	}
 	return null;

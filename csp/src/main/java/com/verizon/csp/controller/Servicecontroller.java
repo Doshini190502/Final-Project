@@ -1,31 +1,32 @@
 package com.verizon.csp.controller;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import com.verizon.csp.model.Servicemodel;
-import com.verizon.csp.service.Serviceservice;
+import com.verizon.csp.repo.Servicerepo;
 @RestController
-@RequestMapping("/api/servicemodel")
+@RequestMapping(value="/api/servicemodel",method= {RequestMethod.GET,RequestMethod.POST})
 public class Servicecontroller {
-	private Serviceservice servservice;
+	private Servicerepo servrepo;
 	@Autowired
-	public Servicecontroller(Serviceservice servservice) {
-		this.servservice=servservice;
+	public Servicecontroller(Servicerepo servrepo) {
+		this.servrepo=servrepo;
 	}
-	@RequestMapping("/allservice")
-	public List<Servicemodel>getAllServicemodels(){
-		return servservice.getAllServicemodels();
+	//@RequestMapping("/allservice")
+	//public List<Servicemodel>getAllServicemodels(){
+		//return servservice.getAllServicemodels();
+	@GetMapping("/create")
+	public String create(Servicerepo servrepo) {
+		return "service";
 	}
-	@PostMapping("/insertservice")
-	public Servicemodel createServicemodel(@RequestBody Servicemodel servicemodel) {
-		return servservice.createServicemodel(servicemodel);
-	}
-	@PostMapping("/update/{service_id}")
-	public Servicemodel updateServicemodel(@PathVariable Integer service_id,@RequestBody Servicemodel servicemodel) {
-			return servservice.updateServicemodel(service_id,servicemodel);
+	@PostMapping("/submit-service")
+	public String save(Servicemodel servmodel)
+	{
+		this.servrepo.save(servmodel);
+			return "index";
 	}
 }
